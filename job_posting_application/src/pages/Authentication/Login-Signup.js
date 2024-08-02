@@ -1,9 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router';
 import './Style.css';
 
 function Login_Signup() {
     const [Active, setActive] = useState(false);
+    const navigate = useNavigate();
     return (
         <>
             <div class="my-style">
@@ -28,7 +30,7 @@ function Login_Signup() {
                             <input type="email" placeholder="Email" />
                             <input type="password" placeholder="Password" />
                             <a href="#">Forgot your password?</a>
-                            <button>Sign In</button>
+                            <button onClick={()=>navigate('/admin')}>Sign In</button>
                         </form>
                     </div>
                     <div class="overlay-container">
