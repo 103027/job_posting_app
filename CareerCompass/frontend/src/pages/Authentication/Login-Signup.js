@@ -8,10 +8,10 @@ function Login_Signup() {
     const navigate = useNavigate();
     return (
         <>
-            <div class="my-style">
-                <div class="logo-name"><img src={require('./logo2-2.png')} alt='app logo' /><h1>CareerCompass</h1></div>
-                <div class={Active ? "container right-panel-active" : "container"} id="container">
-                    <div class="form-container sign-up-container">
+            <div className="my-style">
+                <div className="logo-name"><img src={require('./logo2-2.png')} alt='app logo' /><h1>CareerCompass</h1></div>
+                <div className={Active ? "container right-panel-active" : "container"} id="container">
+                    <div className="form-container sign-up-container">
                         <form action="#">
                             <h1>Create Account</h1>
                             <br />
@@ -22,7 +22,7 @@ function Login_Signup() {
                             <button>Sign Up</button>
                         </form>
                     </div>
-                    <div class="form-container sign-in-container">
+                    <div className="form-container sign-in-container">
                         <form action="#">
                             <h1>Sign in</h1>
                             <br />
@@ -33,17 +33,17 @@ function Login_Signup() {
                             <button onClick={()=>navigate('/admin')}>Sign In</button>
                         </form>
                     </div>
-                    <div class="overlay-container">
-                        <div class="overlay">
-                            <div class="overlay-panel overlay-left">
+                    <div className="overlay-container">
+                        <div className="overlay">
+                            <div className="overlay-panel overlay-left">
                                 <h1>Welcome Back!</h1>
                                 <p>To keep connected with us please login with your personal info</p>
-                                <button class="ghost" id="signIn" onClick={() => setActive(!Active)}>Sign In</button>
+                                <button className="ghost" id="signIn" onClick={() => setActive(!Active)}>Sign In</button>
                             </div>
-                            <div class="overlay-panel overlay-right">
+                            <div className="overlay-panel overlay-right">
                                 <h1>Hello!</h1>
                                 <p>Enter your personal details and start journey with us</p>
-                                <button class="ghost" id="signUp" onClick={() => setActive(!Active)}>Sign Up</button>
+                                <button className="ghost" id="signUp" onClick={() => setActive(!Active)}>Sign Up</button>
                             </div>
                         </div>
                     </div>
