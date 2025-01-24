@@ -86,7 +86,7 @@ function AddJob() {
         <>
             <Box display={'flex'} alignItems={'center'} justifyContent={'center'} flexDirection={'column'} margin={'40px 120px'}>
                 <Box display="flex" flexDirection="row" justifyContent="center" width="100%">
-                    <Button onClick={() => navigate("/admin")}>
+                    <Button onClick={() => navigate("/adminDashobard")}>
                         <ArrowBackTwoToneIcon /> Back
                     </Button>
                     <Box display="flex" flexGrow={1} justifyContent="center" marginRight={5}>
