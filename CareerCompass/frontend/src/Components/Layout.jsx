@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,6 +11,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router';
+import { useLocation } from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -27,27 +28,25 @@ function Header() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+    const location = useLocation();
 
-    useEffect(()=>{
-        setIsAdmin(true)
+    useEffect(() => {
+        setIsAdmin(false)
         setValue('1')
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (value == "1") {
-            isAdmin ? 
-            navigate('/adminDashobard')
-            :
-            navigate('/userDashobard')
+            isAdmin ?
+                navigate('/adminDashboard')
+                :
+                navigate('/userDashboard')
         } else if (value == "2") {
-            isAdmin ? 
-            navigate('/applicants')
-            :
-            navigate('/applications')
+            navigate('/activejobs')
         } else if (value == "3") {
             navigate('/aboutus');
         }
-    },[value])
+    }, [value])
 
     return (
         <>
@@ -74,29 +73,33 @@ function Header() {
                                 CareerCompass
                             </Typography>
                         </Box>
-                        <Box sx={{ flexGrow: 2, display: 'flex', justifyContent: 'center' }}>
-                            <TabContext value={value}>
-                                <Box>
-                                    <TabList onChange={handleChange} textColor="black"
-                                        sx={{
-                                            '.MuiTabs-indicator': {
-                                                backgroundColor: '#0052cc'
+                        {
+                            location.pathname.includes("/adminDashboard") || location.pathname.includes("/aboutus") || location.pathname.includes("/userDashboard") || location.pathname.includes("/activejobs")? 
+                            <Box sx={{ flexGrow: 2, display: 'flex', justifyContent: 'center' }}>
+                                <TabContext value={value}>
+                                    <Box>
+                                        <TabList onChange={handleChange} textColor="black"
+                                            sx={{
+                                                '.MuiTabs-indicator': {
+                                                    backgroundColor: '#0052cc'
+                                                }
+                                            }}
+                                            style={{ marginTop: "20px" }}
+                                            centered
+                                        >
+                                            <Tab label="Dashboard" value="1" />
+                                            {
+                                                isAdmin ? ' ' : <Tab label="Jobs" value="2" />
                                             }
-                                        }}
-                                        style={{marginTop:"20px"}}
-                                        centered
-                                    >
-                                        <Tab label="Dashboard" value="1"/>
-                                        {
-                                            isAdmin ? <Tab label="Applicants" value="2"/> : <Tab label="Applications" value="2"/> 
-                                        }
-                                        <Tab label="About Us" value="3"/>
-                                    </TabList>
-                                </Box>
-                            </TabContext>
-                        </Box>
-                        <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center' }}>
-                            <Button style={{ color: "black", border: "none" }} endIcon={<LogoutIcon style={{color:'#FF4B2B'}}/>}>
+                                            <Tab label="About Us" value="3" />
+                                        </TabList>
+                                    </Box>
+                                </TabContext>
+                            </Box>
+                            : ' '
+                        }
+                        <Box sx={{ display: 'flex', justifyContent: 'center', mr:"65px" }}>
+                            <Button style={{ color: "black", border: "none" }} onClick={() => { navigate("/authentication") }} endIcon={<LogoutIcon style={{ color: '#FF4B2B' }} />}>
                                 Hassan Muzaffar
                             </Button>
                         </Box>

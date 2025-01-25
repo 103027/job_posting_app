@@ -8,7 +8,7 @@ import BasicLayout from './Components/BasicLayout';
 import AddJob from './pages/Admin/Jobs/add_job';
 import ViewJob from './pages/Admin/Jobs/view_Job';
 import ActiveJobs from './pages/User/activejobs';
-import Applications from './pages/Applications';
+import Dashboard from './pages/User/dashboard';
 import './App.css';
 
 function App() {
@@ -19,11 +19,11 @@ function App() {
           <Route path="/authentication" element={<Login_Signup />} />
           <Route path="/" element={<BasicLayout />}>
             <Route path="/viewJob/:id" element={<ViewJob />} />
-            <Route path="/adminDashobard" element={<JobListings />} />
-            <Route path="/userDashobard" element={<ActiveJobs />} />
+            <Route path="/adminDashboard" element={<JobListings />} />
+            <Route path="/userDashboard" element={<Dashboard />} />
             <Route path="/addJob" element={<AddJob />} />
             <Route path="/applicants" element={<Applicants />} />
-            <Route path="/applications" element={<Applications />} />
+            <Route path="/activejobs" element={<ActiveJobs />} />
             <Route path="/aboutus" element={<AboutUs />} />
           </Route>
         </Routes>
