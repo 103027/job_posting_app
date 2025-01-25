@@ -86,7 +86,7 @@ function ViewJob() {
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 4, gap: 4 }}>
       {/* Job Title */}
       <Box display="flex" flexDirection="row" justifyContent="center" width="80%" >
-        <Button onClick={() => navigate("/adminDashobard")}>
+        <Button onClick={() => navigate("/adminDashboard")}>
           <ArrowBackTwoToneIcon /> Back
         </Button>
         <Box display="flex" flexGrow={1} justifyContent="center" marginRight={5}>
