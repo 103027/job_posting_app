@@ -9,6 +9,7 @@ import AddJob from './pages/Admin/Jobs/add_job';
 import ViewJob from './pages/Admin/Jobs/view_Job';
 import ActiveJobs from './pages/User/activejobs';
 import Dashboard from './pages/User/dashboard';
+import Job from './pages/job';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/applicants" element={<Applicants />} />
             <Route path="/activejobs" element={<ActiveJobs />} />
             <Route path="/aboutus" element={<AboutUs />} />
+            <Route path="/job" element={<Job />} />
           </Route>
         </Routes>
       </BrowserRouter>
