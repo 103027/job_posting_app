@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login_Signup from "./pages/Authentication/Login-Signup";
 import JobListings from './pages/Admin/Jobs/job_listings';
-import Applicants from './pages/Admin/Applicants';
+import Apply from './pages/User/Apply';
 import AboutUs from './pages/AboutUs';
 import BasicLayout from './Components/BasicLayout';
 import AddJob from './pages/Admin/Jobs/add_job';
@@ -23,7 +23,7 @@ function App() {
             <Route path="/adminDashboard" element={<JobListings />} />
             <Route path="/userDashboard" element={<Dashboard />} />
             <Route path="/addJob" element={<AddJob />} />
-            <Route path="/applicants" element={<Applicants />} />
+            <Route path="/apply" element={<Apply />} />
             <Route path="/activejobs" element={<ActiveJobs />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/job" element={<Job />} />
