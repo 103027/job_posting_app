@@ -84,6 +84,16 @@ function Job() {
                         {jobDetails.companyDescription}
                     </Typography>
                 </Box>
+                <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "start", mt: 2 }}>
+                    <Button sx={{
+                        borderRadius: "10px", color: "white", backgroundColor: "#0052cc", "&:hover": {
+                            backgroundColor: " #003380"
+                        },
+                        p: "10px 20px"
+                    }} onClick={() => { navigate("/apply") }}>
+                        Apply Now
+                    </Button>
+                </Box>
                 <Divider sx={{ mt: 2 }} />
                 <Box sx={{ mt: 2, ml: 2 }}>
                     <Typography variant='h6' sx={{ fontWeight: "bold" }}>
@@ -177,17 +187,6 @@ function Job() {
                     </Typography>
                 </Box>
                 <Divider sx={{ mt: 2 }} />
-                <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "start", mt: 2 }}>
-                    <Button sx={{
-                        borderRadius: "10px", color: "white", backgroundColor: "#0052cc", "&:hover": {
-                            color: "#0052cc",
-                            backgroundColor: "#eee"
-                        },
-                        p: "10px 20px"
-                    }} onClick={() => { navigate("/apply") }}>
-                        Apply Now
-                    </Button>
-                </Box>
             </Box>
         </Box >
     );
