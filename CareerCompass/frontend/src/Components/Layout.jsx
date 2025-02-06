@@ -31,7 +31,7 @@ function Header() {
     const location = useLocation();
 
     useEffect(() => {
-        setIsAdmin(true)
+        setIsAdmin(false)
         setValue('1')
     }, [])
 
