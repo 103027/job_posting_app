@@ -54,11 +54,6 @@ const jobSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Admin",
             required: true,
-        },
-        company: {
-            type: Schema.Types.ObjectId,
-            ref: "Company",
-            required: true,
         }
     },
     {
