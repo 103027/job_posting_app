@@ -50,10 +50,15 @@ const jobSchema = new Schema(
             enum: ["active", "not-active"],
             default: "active"
         },
-        createdBy: {
+        jobCreatedBy: {
             type: Schema.Types.ObjectId,
             ref: "Admin",
             required: true,
+        },
+        companyID:{
+            type: Schema.Types.ObjectId,
+            ref: "Company",
+            required: true
         }
     },
     {
