@@ -92,8 +92,30 @@ const getJobsByAdmin = asyncHandler(async (req, resp) => {
     );
 });
 
+const editJob = asyncHandler(async (req, resp) =>{
+    const { jobId } = req.params;
+    const updateData = req.body;
+
+    const updatedJob = await Job.findByIdAndUpdate(
+        jobId,
+        { $set: updateData },
+        { new: true }
+    );
+
+    if (!updatedJob) {
+        throw new ApiError(500, "Something went wrong while editing the Job")
+    }
+
+    return resp.status(201).json(
+        new ApiResponse(200, {
+            updatedJob,
+        }, "Job added Successfully")
+    )
+});
+
 
 export {
     addJob,
-    getJobsByAdmin
+    getJobsByAdmin,
+    editJob
 }
