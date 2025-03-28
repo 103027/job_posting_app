@@ -82,7 +82,7 @@ const getJobsByAdmin = asyncHandler(async (req, resp) => {
         },
         {
             $project: {
-                jobs_ : 1
+                jobs_: 1
             }
         }
     ]);
@@ -92,7 +92,7 @@ const getJobsByAdmin = asyncHandler(async (req, resp) => {
     );
 });
 
-const editJob = asyncHandler(async (req, resp) =>{
+const editJob = asyncHandler(async (req, resp) => {
     const { jobId } = req.params;
     const updateData = req.body;
 
@@ -109,13 +109,30 @@ const editJob = asyncHandler(async (req, resp) =>{
     return resp.status(201).json(
         new ApiResponse(200, {
             updatedJob,
-        }, "Job added Successfully")
+        }, "Job edited Successfully")
     )
 });
 
+const activeJobs = asyncHandler(async (req, resp) => {
+
+    const active_jobs = await Job.find({
+        jobStatus: "active"
+    })
+
+    if (!active_jobs) {
+        throw new ApiError(500, "Something went wrong while finding active Jobs")
+    }
+
+    return resp.status(201).json(
+        new ApiResponse(200, {
+            active_jobs,
+        }, "Active Jobs fetched Successfully")
+    )
+})
 
 export {
     addJob,
     getJobsByAdmin,
-    editJob
+    editJob,
+    activeJobs
 }

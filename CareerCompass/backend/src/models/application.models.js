@@ -6,6 +6,12 @@ const applicationSchema = new Schema(
             type: String,
             required: true
         },
+        phoneNumber: {
+            type: String,
+            required: true,
+            trim: true,
+            match: [/^\+?\d{10,15}$/, "Please enter a valid phone number"], // Ensures a valid phone number format
+        },
         city: {
             type: String,
             required: true,
@@ -41,6 +47,11 @@ const applicationSchema = new Schema(
         job: {
             type: Schema.Types.ObjectId,
             ref: "Job",
+            required: true
+        },
+        applicant: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
             required: true
         }
     },
