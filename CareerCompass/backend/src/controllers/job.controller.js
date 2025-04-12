@@ -130,9 +130,24 @@ const activeJobs = asyncHandler(async (req, resp) => {
     )
 })
 
+const viewJob = asyncHandler(async (req, resp) => {
+    const { jobId } = req.params;
+
+    const job = await Job.findById(jobId);
+
+    if (!job) {
+        throw new ApiError(500, "Something went wrong while finding the Job");
+    }
+
+    return resp.status(200).json(
+        new ApiResponse(200, { job }, "Job found successfully")
+    );
+});
+
 export {
     addJob,
     getJobsByAdmin,
     editJob,
-    activeJobs
+    activeJobs,
+    viewJob
 }

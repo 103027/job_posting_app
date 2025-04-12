@@ -2,6 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import dotenv from "dotenv";
+import crypto from "crypto";
 
 dotenv.config()
 
@@ -28,7 +29,13 @@ const userSchema = new Schema(
         },
         refreshToken: {
             type: String
-        }
+        },
+        resetPasswordToken: {
+            type: String
+        },
+        resetPasswordExpires: {
+            type: Date
+        },
     },
     {
         timestamps: true
@@ -45,6 +52,19 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
+
+userSchema.methods.generateResetPasswordToken = function () {
+    const resetToken = crypto.randomBytes(32).toString("hex");
+
+    this.resetPasswordToken = crypto
+        .createHash("sha256")
+        .update(resetToken)
+        .digest("hex");
+
+    this.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // Token valid for 15 mins
+
+    return resetToken;
+};
 
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign(

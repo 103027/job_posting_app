@@ -3,10 +3,13 @@ import {
     registerUser,
     loginUser,
     logoutUser,
-    refreshAccessToken
+    refreshAccessToken,
+    requestPasswordReset,
+    resetPassword
 } from "../controllers/user.controller.js";
 import {
-    activeJobs
+    activeJobs,
+    viewJob
 } from "../controllers/job.controller.js";
 import {
     applyforJob
@@ -22,5 +25,8 @@ router.route("/logout").post(verifyUserJWT, logoutUser)
 router.route("/refresh-token").post(refreshAccessToken)
 router.route("/activejobs").get(verifyUserJWT, activeJobs)
 router.route("/apply/:jobId").post(upload.fields([ {name:"resume",maxCount: 1 } ]),verifyUserJWT, applyforJob)
+router.route("/viewjob/:jobId").get(verifyUserJWT,viewJob)
+router.route("/getrefreshtoken").post(requestPasswordReset)
+router.route("/resetpassword/:token").post(resetPassword)
 
 export default router
