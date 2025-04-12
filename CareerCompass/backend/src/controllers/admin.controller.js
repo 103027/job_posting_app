@@ -2,6 +2,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { Admin } from "../models/admin.models.js";
+import crypto from "crypto";
 
 const registerAdmin = asyncHandler(async (req, resp) => {
     const { username, email, password } = req.body;
@@ -173,9 +174,53 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     }
 })
 
+const requestPasswordReset = asyncHandler(async (req, res) => {
+    const { email } = req.body;
+
+    const admin = await Admin.findOne({ email });
+    if (!admin) throw new ApiError(404, "Admin not found");
+
+    const resetToken = admin.generateResetPasswordToken();
+    await admin.save({ validateBeforeSave: false });
+
+    return res.status(200).json(new ApiResponse(200, {resetToken}, "Reset link sent"));
+});
+
+const resetPassword = asyncHandler(async (req, res) => {
+    const { token } = req.params;
+    const { newPassword } = req.body;
+
+    if (!token) {
+        throw new ApiError(400, "Reset token is required");
+    }
+
+    if (!newPassword || newPassword.trim() === "") {
+        throw new ApiError(400, "New password is required");
+    }
+
+    const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+    const admin = await Admin.findOne({
+        resetPasswordToken: hashedToken,
+        resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!admin) throw new ApiError(400, "Token is invalid or expired");
+
+    admin.password = newPassword;
+    admin.resetPasswordToken = undefined;
+    admin.resetPasswordExpires = undefined;
+
+    await admin.save();
+
+    return res.status(200).json(new ApiResponse(200, {}, "Password reset successful"));
+});
+
 export {
     registerAdmin,
     loginAdmin,
     logoutAdmin,
-    refreshAccessToken
+    refreshAccessToken,
+    requestPasswordReset,
+    resetPassword
 }
