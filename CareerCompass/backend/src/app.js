@@ -17,8 +17,10 @@ app.use(cookieParser())
 // routes
 import userRouter from "./routes/user.routes.js";
 import adminRouter from "./routes/admin.routes.js";
+import chatbotRouter from "./routes/chatbot.routes.js";
 
 app.use("/user",userRouter)
 app.use("/admin",adminRouter)
+app.use("/chatbot",chatbotRouter)
 
 export default app;
